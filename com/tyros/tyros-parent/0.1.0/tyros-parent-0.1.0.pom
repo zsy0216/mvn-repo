@@ -10,8 +10,8 @@
         <relativePath/> <!-- lookup parent from repository -->
     </parent>
 
-    <groupId>com.typos</groupId>
-    <artifactId>typos-parent</artifactId>
+    <groupId>com.tyros</groupId>
+    <artifactId>tyros-parent</artifactId>
     <version>0.1.0</version>
     <packaging>pom</packaging>
 
@@ -21,7 +21,7 @@
         <fastjson.version>1.2.75</fastjson.version>
         <hutool.version>5.6.1</hutool.version>
         <knife4j.version>3.0.3</knife4j.version>
-        <typos.version>${project.version}</typos.version>
+        <tyros.version>${project.version}</tyros.version>
     </properties>
 
     <dependencyManagement>
@@ -57,8 +57,8 @@
 
     <distributionManagement>
         <repository>
-            <id>typos-repository</id>
-            <url>file:E:\typos-projects\mvn-repository</url>
+            <id>tyros-repository</id>
+            <url>file:E:\tyros-projects\mvn-repository</url>
         </repository>
     </distributionManagement>
 </project>
