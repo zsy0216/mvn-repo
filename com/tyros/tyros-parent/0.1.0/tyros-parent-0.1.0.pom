@@ -55,10 +55,74 @@
         </dependencies>
     </dependencyManagement>
 
+    <!-- 本地暂存地址 -->
     <distributionManagement>
         <repository>
-            <id>tyros-repository</id>
-            <url>file:E:\tyros-projects\mvn-repository</url>
+            <id>internal.repo</id>
+            <name>Local Staging Repository</name>
+            <url>file://${project.build.directory}/mvn-repo</url>
         </repository>
     </distributionManagement>
+
+    <build>
+        <plugins>
+            <!-- 要将源码放上去，需要加入这个插件 -->
+            <plugin>
+                <groupId>org.apache.maven.plugins</groupId>
+                <artifactId>maven-source-plugin</artifactId>
+                <configuration>
+                    <attach>true</attach>
+                </configuration>
+                <executions>
+                    <execution>
+                        <phase>compile</phase>
+                        <goals>
+                            <goal>jar</goal>
+                        </goals>
+                    </execution>
+                </executions>
+            </plugin>
+            <plugin>
+                <groupId>org.apache.maven.plugins</groupId>
+                <artifactId>maven-deploy-plugin</artifactId>
+                <version>2.8.2</version>
+                <configuration>
+                    <altDeploymentRepository>internal.repo::default::file://${project.build.directory}/mvn-repo
+                    </altDeploymentRepository>
+                </configuration>
+            </plugin>
+            <!--github上传插件,用于修改后的发布,执行 mvn clean deploy 自动打包上传到github-->
+            <plugin>
+                <groupId>com.github.github</groupId>
+                <artifactId>site-maven-plugin</artifactId>
+                <version>0.12</version>
+                <executions>
+                    <execution>
+                        <goals>
+                            <goal>site</goal>
+                        </goals>
+                        <phase>deploy</phase>
+                        <configuration>
+                            <server>github</server>
+                            <message>feat: deploy ${project.artifactId} ${project.version}</message>
+                            <noJekyll>true</noJekyll>
+                            <!--本地jar地址, 对应上面的altDeploymentRepository-->
+                            <outputDirectory>${project.build.directory}/mvn-repo</outputDirectory>
+                            <!--分支-->
+                            <branch>refs/heads/master</branch>
+                            <merge>true</merge>
+                            <includes>
+                                <include>**/*</include>
+                            </includes>
+                            <!--对应github上创建的仓库名称 name-->
+                            <repositoryName>mvn-repo</repositoryName>
+                            <!--github登录账号 对应的密码存在maven的setting.xml文件中-->
+                            <!--由github组织拥有，则该值将是组织名称，如果由用户拥有，则该值将是用户名-->
+                            <repositoryOwner>zsy0216</repositoryOwner>
+                        </configuration>
+                    </execution>
+                </executions>
+            </plugin>
+        </plugins>
+    </build>
 </project>
