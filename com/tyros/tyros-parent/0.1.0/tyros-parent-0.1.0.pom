@@ -18,10 +18,10 @@
         <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
         <project.reporting.outputEncoding>UTF-8</project.reporting.outputEncoding>
         <druid.version>1.1.20</druid.version>
-        <mybatis.plus.version>3.4.3</mybatis.plus.version>
+        <mybatis.plus.version>3.4.3.2</mybatis.plus.version>
         <fastjson.version>1.2.75</fastjson.version>
         <swagger.version>1.5.22</swagger.version>
-        <hutool.version>5.6.1</hutool.version>
+        <hutool.version>5.7.20</hutool.version>
         <knife4j.version>3.0.3</knife4j.version>
         <springboot.version>2.6.3</springboot.version>
     </properties>
@@ -31,7 +31,7 @@
             <dependency>
                 <groupId>com.tyros.common</groupId>
                 <artifactId>tyros-common</artifactId>
-                <version>0.1.0</version>
+                <version>${tyros.version}</version>
             </dependency>
             <dependency>
                 <groupId>org.springframework.boot</groupId>
